@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.robotcontroller.internal.testcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Created by juanjose1 on 11/15/16.
  */
+@TeleOp(name ="color test", group = "OPmode")
 public class color_method extends LinearOpMode{
 
     ColorSensor colorleft;
@@ -50,20 +52,30 @@ public class color_method extends LinearOpMode{
 
 
 
-        if (colorleft.red() * 8 > colorright.red()){
+        if (colorleft.red() * 8 > 0.0 && colorright.blue() * 8 > 0.0){
 
             hsvValuesred = true;
-            telemetry.addData("Red Detected", String.format("03d", hsvValuesred));
+            hsvValuesblue = false;
+            telemetry.addData("Red", String.format("03d", hsvValuesred));
 
         }
-        else if (colorleft.red() * 8 < colorright.red()){
+        else if (colorright.red() * 8 > 0.0 && colorleft.blue() * 8 > 0.0){
 
             hsvValuesred = false;
-            telemetry.addData("Red Not Detected", String.format("03d", hsvValuesred));
+            hsvValuesblue = true;
+            telemetry.addData("Red", String.format("03d", hsvValuesred));
+
+        }
+        else if (colorleft.red() * 8 == 0.0 && colorright.blue() * 8 == 0.0){
+
+            hsvValuesred = false;
+            hsvValuesblue = false;
+            telemetry.addData("Red", String.format("03d", hsvValuesred));
+            telemetry.addData("Blue", String.format("03d", hsvValuesblue));
 
         }
 
-        if (colorleft.blue() * 8 > colorright.blue() * 8){
+       /* if (colorleft.blue() * 8 > colorright.blue() * 8){
 
             hsvValuesblue = true;
             telemetry.addData("Blue Detected", String.format("03d", hsvValuesblue));
@@ -74,7 +86,7 @@ public class color_method extends LinearOpMode{
             hsvValuesblue = false;
             telemetry.addData("Blue Not Detected", String.format("03d", hsvValuesblue));
 
-        }
+        }*/
         if (hsvValuesred == true && hsvValuesblue == false){
 
             leftb.setPosition(1.0);

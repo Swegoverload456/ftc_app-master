@@ -46,13 +46,22 @@ public class gyro_method extends LinearOpMode {
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        sleep(1000);
+        telemetry.addData(">", "Gyro Calibrating. Do Not move!");
+        telemetry.update();
+
         mrgyro.calibrate();
+
+        while (mrgyro.isCalibrating())  {
+            Thread.sleep(50);
+            idle();
+        }
+
+        telemetry.addData(">", "Gyro Calibrated.  Press Start.");
+        telemetry.update();
+
 
         waitForStart();
 
-        while (mrgyro.isCalibrating()) {
-        }
 
         while (opModeIsActive()) {
 
@@ -69,7 +78,7 @@ public class gyro_method extends LinearOpMode {
 
     public void turnabsolute(int target) throws InterruptedException{
 
-        int zAccumulated = mrgyro.getIntegratedZValue();
+        int zAccumulated = mrgyro.getHeading();
 
         while (Math.abs(zAccumulated - target) > 3) {
 
@@ -90,9 +99,8 @@ public class gyro_method extends LinearOpMode {
                 backright.setPower(0.15);
 
             }
-            waitOneFullHardwareCycle();
 
-            zAccumulated = mrgyro.getIntegratedZValue();
+            zAccumulated = mrgyro.getHeading();
 
             telemetry.addData("1 accu", String.format("03d", zAccumulated));
         }
@@ -105,7 +113,7 @@ public class gyro_method extends LinearOpMode {
 
             telemetry.addData("1 accu", String.format("03d", zAccumulated));
 
-            waitOneFullHardwareCycle();
+
 
         }
     }

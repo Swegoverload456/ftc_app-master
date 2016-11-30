@@ -3,6 +3,7 @@ package org.firstinspires.ftc.robotcontroller.internal.testcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.GyroSensor;
@@ -10,6 +11,7 @@ import com.qualcomm.robotcore.hardware.GyroSensor;
 /**
  * Created by juanjose1 on 11/15/16.
  */
+@TeleOp(name = "gyro" , group = "OpMode")
 public class gyro extends LinearOpMode {
 
     DcMotor frontleft;
@@ -44,10 +46,7 @@ public class gyro extends LinearOpMode {
         backright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
 */
-        frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         sleep(1000);
         mrgyro.calibrate();
@@ -61,26 +60,51 @@ public class gyro extends LinearOpMode {
 
             zAccumulated = mrgyro.getIntegratedZValue();
 
-            while (Math.abs(zAccumulated - target) > 3) {
+            if (zAccumulated < 0){
+
+                frontleft.setPower(0.5);
+                frontright.setPower(-0.5);
+                backleft.setPower(0.5);
+                backright.setPower(-0.5);
+
+            }
+            else if (zAccumulated > 0){
+
+                frontleft.setPower(-0.5);
+                frontright.setPower(0.5);
+                backleft.setPower(-0.5);
+                backright.setPower(0.5);
+
+            }
+            else if (zAccumulated == 0){
+
+                frontleft.setPower(0);
+                frontright.setPower(0);
+                backleft.setPower(0);
+                backright.setPower(0);
+
+            }
+
+           /* while (Math.abs(zAccumulated - target) > 0) {
 
 
-                if (zAccumulated > 0) {
-
-                    frontleft.setPower(0.15);
-                    frontright.setPower(-0.15);
-                    backleft.setPower(0.15);
-                    backright.setPower(-0.15);
-
-                }
                 if (zAccumulated < 0) {
 
-                    frontleft.setPower(-0.15);
-                    frontright.setPower(0.15);
-                    backleft.setPower(-0.15);
-                    backright.setPower(0.15);
+                    frontleft.setPower(0.5);
+                    frontright.setPower(-0.5);
+                    backleft.setPower(0.5);
+                    backright.setPower(-0.5);
 
                 }
-                waitOneFullHardwareCycle();
+                if (zAccumulated > 0) {
+
+                    frontleft.setPower(-0.5);
+                    frontright.setPower(0.5);
+                    backleft.setPower(-0.5);
+                    backright.setPower(0.5);
+
+                }
+
 
                 zAccumulated = mrgyro.getIntegratedZValue();
 
@@ -95,9 +119,9 @@ public class gyro extends LinearOpMode {
 
                 telemetry.addData("1 accu", String.format("03d", zAccumulated));
 
-                waitOneFullHardwareCycle();
 
 
+*/
 
         }
     }

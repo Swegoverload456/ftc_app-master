@@ -42,6 +42,13 @@ public class teleop9110 extends OpMode {
     Servo release;
     Servo link;
 
+    int c1 = 0;//shooter
+    int c2 = 0;//intake
+    int c3 = 0;//winch up
+    int c4 = 0;//winch down
+    int c5 = 0;
+    boolean mult = false;
+
     @Override
     public void init() {
 
@@ -67,8 +74,8 @@ public class teleop9110 extends OpMode {
 
 
 
+        backleft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
         outtake.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
@@ -76,52 +83,126 @@ public class teleop9110 extends OpMode {
     public void loop() {
 
         //Drive Train
-        float lefty = gamepad1.left_stick_y;
+        float lefty = -gamepad1.left_stick_y;
         float righty = gamepad1.right_stick_y;
 
-        int a = 0;
-        int b = 0;
-        int x = 0;
+            frontleft.setPower(lefty);
+            frontright.setPower(righty);
+            backleft.setPower(lefty);
+            backright.setPower(righty);
 
-        frontleft.setPower(lefty);
-        frontright.setPower(righty);
-        backleft.setPower(lefty);
-        backright.setPower(righty);
 
-        if (gamepad1.start == true) {
+        if (gamepad1.start == true && c3 == 0) {
 
-            winch.setPower(1.0);
+            c3 = 1;
 
-        } else if (gamepad1.back == true) {
+        }
+        else if (gamepad1.start == false && c3 == 1) {
 
             winch.setPower(-1.0);
+            c3 = 2;
 
         }
-        if (gamepad1.a == true) {
+        else if (gamepad1.start == true && c3 == 2){
+
+            c3 = 3;
+
+        }
+        else if (gamepad1.start == false && c3 == 3){
+
+            winch.setPower(0.0);
+            c3 = 0;
+
+        }
+        else if (gamepad1.x)
+        if (gamepad1.back == true && c4 == 0) {
+
+            c4 = 1;
+
+        }
+        else if (gamepad1.back == false && c4 == 1) {
+
+            winch.setPower(1.0);
+            c4 = 2;
+
+        }
+        else if (gamepad1.back == true && c4 == 2){
+
+            c4 = 3;
+
+        }
+        else if (gamepad1.back == false && c4 == 3){
+
+            winch.setPower(0.0);
+            c4 = 0;
+
+        }
+
+        if (gamepad1.a == true && c1 == 0) {
+
+            c1 = 1;
+
+        }
+        else if(gamepad1.a == false && c1 == 1){
 
             shooter.setPower(1.0);
+            c1 = 2;
 
         }
-        else if(gamepad1.a == false){
+        else if (gamepad1.a == true && c1 == 2){
+
+            c1 = 3;
+
+        }
+        else if (gamepad1.a == false && c1 == 3){
 
             shooter.setPower(0.0);
+            c1 = 0;
 
         }
-        if (gamepad1.b && gamepad1.x == false && gamepad1.dpad_left == false){
+        if (gamepad1.x == true && c5 == 0){
+
+            c5 = 1;
+
+        }
+        else if (gamepad1.x == false && c5 == 1){
+
+            shooter.setPower(-1.0);
+            c5 = 2;
+
+        }
+        else if (gamepad1.x == true && c5 == 2){
+
+            c5 = 3;
+
+        }
+        else if (gamepad1.x == false && c5 == 3){
+
+            shooter.setPower(0.0);
+            c5 = 0;
+
+        }
+        if (gamepad1.b == true && c2 == 0){
+
+            c2 = 1;
+
+
+        }
+        else if (gamepad1.b == false && c2 == 1){
 
             outtake.setPower(1.0);
-
+            c2 = 2;
 
         }
-        else if (gamepad1.b == false && gamepad1.x && gamepad1.dpad_left == false){
+        else if (gamepad1.b == true && c2 == 2){
+
+            c2 = 3;
+
+        }
+        else if (gamepad1.b == false && c2 == 3){
 
             outtake.setPower(0.0);
-
-
-        }
-        else if (!gamepad1.b && !gamepad1.x && gamepad1.dpad_left){
-
-            outtake.setPower(-1.0);
+            c2 = 0;
 
         }
         if (gamepad1.y){

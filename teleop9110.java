@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.robotcontroller.internal.testcode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.*;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -33,13 +33,13 @@ public class teleop9110 extends OpMode {
     DcMotor outtake;
 
     //Linear Slide
-    DcMotor winch;
+    //DcMotor winch;
 
     //Button Pushers
     Servo leftb;
     Servo rightb;
 
-    Servo release;
+    //Servo release;
     Servo link;
 
     int c1 = 0;//shooter
@@ -63,19 +63,19 @@ public class teleop9110 extends OpMode {
         intake = hardwareMap.dcMotor.get("intake");
         outtake = hardwareMap.dcMotor.get("outtake");
 
-        winch = hardwareMap.dcMotor.get("winch");
+      //  winch = hardwareMap.dcMotor.get("winch");
 
         leftb = hardwareMap.servo.get("leftb");
         rightb = hardwareMap.servo.get("rightb");
 
-        release = hardwareMap.servo.get("release");
+      //  release = hardwareMap.servo.get("release");
 
         link = hardwareMap.servo.get("link");
 
 
 
         backleft.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontright.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
         outtake.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
@@ -84,7 +84,7 @@ public class teleop9110 extends OpMode {
 
         //Drive Train
         float lefty = -gamepad1.left_stick_y;
-        float righty = gamepad1.right_stick_y;
+        float righty = -gamepad1.right_stick_y;
 
             frontleft.setPower(lefty);
             frontright.setPower(righty);
@@ -92,14 +92,14 @@ public class teleop9110 extends OpMode {
             backright.setPower(righty);
 
 
-        if (gamepad1.start == true && c3 == 0) {
+       /* if (gamepad1.start == true && c3 == 0) {
 
             c3 = 1;
 
         }
         else if (gamepad1.start == false && c3 == 1) {
 
-            winch.setPower(-1.0);
+         //   winch.setPower(-1.0);
             c3 = 2;
 
         }
@@ -110,11 +110,10 @@ public class teleop9110 extends OpMode {
         }
         else if (gamepad1.start == false && c3 == 3){
 
-            winch.setPower(0.0);
+          //  winch.setPower(0.0);
             c3 = 0;
 
         }
-        else if (gamepad1.x)
         if (gamepad1.back == true && c4 == 0) {
 
             c4 = 1;
@@ -122,7 +121,7 @@ public class teleop9110 extends OpMode {
         }
         else if (gamepad1.back == false && c4 == 1) {
 
-            winch.setPower(1.0);
+          //  winch.setPower(1.0);
             c4 = 2;
 
         }
@@ -133,11 +132,11 @@ public class teleop9110 extends OpMode {
         }
         else if (gamepad1.back == false && c4 == 3){
 
-            winch.setPower(0.0);
+           // winch.setPower(0.0);
             c4 = 0;
 
         }
-
+*/
         if (gamepad1.a == true && c1 == 0) {
 
             c1 = 1;
@@ -145,7 +144,7 @@ public class teleop9110 extends OpMode {
         }
         else if(gamepad1.a == false && c1 == 1){
 
-            shooter.setPower(1.0);
+            shooter.setPower(0.85);
             c1 = 2;
 
         }
@@ -158,28 +157,6 @@ public class teleop9110 extends OpMode {
 
             shooter.setPower(0.0);
             c1 = 0;
-
-        }
-        if (gamepad1.x == true && c5 == 0){
-
-            c5 = 1;
-
-        }
-        else if (gamepad1.x == false && c5 == 1){
-
-            shooter.setPower(-1.0);
-            c5 = 2;
-
-        }
-        else if (gamepad1.x == true && c5 == 2){
-
-            c5 = 3;
-
-        }
-        else if (gamepad1.x == false && c5 == 3){
-
-            shooter.setPower(0.0);
-            c5 = 0;
 
         }
         if (gamepad1.b == true && c2 == 0){
@@ -207,7 +184,7 @@ public class teleop9110 extends OpMode {
         }
         if (gamepad1.y){
 
-            link.setPosition(0.0);
+            link.setPosition(0.2);
 
         }
         else{
@@ -230,32 +207,32 @@ public class teleop9110 extends OpMode {
         }
         if (gamepad1.dpad_up){
 
-            release.setPosition(0.0);
+           // release.setPosition(0.0);
 
         }
         else if (gamepad1.dpad_down){
 
-            release.setPosition(0.5);
+          //  release.setPosition(0.5);
 
         }
         if(gamepad1.right_trigger < 0.5){
 
-            rightb.setPosition(1.0);
+            rightb.setPosition(0.0);
 
         }
         else if (gamepad1.right_trigger > 0.5) {
 
-            rightb.setPosition(0.0);
+            rightb.setPosition(1.0);
 
         }
         if (gamepad1.left_trigger < 0.5){
 
-            leftb.setPosition(0.0);
+            leftb.setPosition(1.0);
 
         }
         else if (gamepad1.left_trigger > 0.5){
 
-            leftb.setPosition(1.0);
+            leftb.setPosition(0.0);
 
         }
 

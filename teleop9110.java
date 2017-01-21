@@ -33,7 +33,7 @@ public class teleop9110 extends OpMode {
     DcMotor outtake;
 
     //Linear Slide
-    //DcMotor winch;
+    DcMotor winch;
 
     //Button Pushers
     Servo leftb;
@@ -63,7 +63,7 @@ public class teleop9110 extends OpMode {
         intake = hardwareMap.dcMotor.get("intake");
         outtake = hardwareMap.dcMotor.get("outtake");
 
-      //  winch = hardwareMap.dcMotor.get("winch");
+        winch = hardwareMap.dcMotor.get("winch");
 
         leftb = hardwareMap.servo.get("leftb");
         rightb = hardwareMap.servo.get("rightb");
@@ -92,14 +92,14 @@ public class teleop9110 extends OpMode {
             backright.setPower(righty);
 
 
-       /* if (gamepad1.start == true && c3 == 0) {
+        if (gamepad1.start == true && c3 == 0) {
 
             c3 = 1;
 
         }
         else if (gamepad1.start == false && c3 == 1) {
 
-         //   winch.setPower(-1.0);
+           winch.setPower(-1.0);
             c3 = 2;
 
         }
@@ -110,7 +110,7 @@ public class teleop9110 extends OpMode {
         }
         else if (gamepad1.start == false && c3 == 3){
 
-          //  winch.setPower(0.0);
+            winch.setPower(0.0);
             c3 = 0;
 
         }
@@ -121,7 +121,7 @@ public class teleop9110 extends OpMode {
         }
         else if (gamepad1.back == false && c4 == 1) {
 
-          //  winch.setPower(1.0);
+            winch.setPower(1.0);
             c4 = 2;
 
         }
@@ -132,11 +132,11 @@ public class teleop9110 extends OpMode {
         }
         else if (gamepad1.back == false && c4 == 3){
 
-           // winch.setPower(0.0);
+            winch.setPower(0.0);
             c4 = 0;
 
         }
-*/
+
         if (gamepad1.a == true && c1 == 0) {
 
             c1 = 1;

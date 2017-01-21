@@ -105,24 +105,24 @@ public class autoblue3 extends LinearOpMode {
         telemetry.update();
 
         encoderDrive(0.25, -9, -9, 5000);
-        sleep(50);
+        sleep(10);
         shooter.setPower(0.85);
         intake.setPower(0.0);
         sleep(500);
-        shooter.setPower(0.85);
+        shooter.setPower(0.90);
         intake.setPower(1.0);
         sleep(1000);
         shooter.setPower(0.0);
         intake.setPower(0.0);
-        sleep(50);
-        encoderDrive(0.25, -14, 14, 5000);
-        sleep(50);
+        sleep(10);
+        encoderDrive(0.40, -15, 15, 5000);
+        sleep(10);
         encoderDrive(0.25, 19, 19, 5000);
-        sleep(50);
-        encoderDrive(0.25, 6, -6, 5000);
-        sleep(50);
-        encoderDrive(0.25, 8, 8, 5000);
-        sleep(50);
+        sleep(10);
+        encoderDrive(0.40, 6, -6, 5000);
+        sleep(10);
+        encoderDrive(0.25, 10, 10, 5000);
+        sleep(10);
         if (color.red() * 8 > color.blue() * 8){
 
             rightb.setPosition(1.0);
@@ -144,15 +144,17 @@ public class autoblue3 extends LinearOpMode {
         }
         sleep(1000);
         encoderDrive(0.25, 4, 4, 5000);
-        sleep(50);
+        leftb.setPosition(1.0);
+        rightb.setPosition(0.0);
+        sleep(10);
         encoderDrive(0.25, -4, -4, 5000);
-        sleep(50);
-        encoderDrive(0.25, -9, 9, 5000);
-        sleep(50);
-        encoderDrive(0.25, 20.5, 20.5, 5000);
-        sleep(50);
-        encoderDrive(0.25, 10.5, -10.5, 5000);
-        sleep(50);
+        sleep(10);
+        encoderDrive(0.40, -14, 14 , 5000);
+        sleep(10);
+        encoderDrive(0.25, 24, 24, 5000);
+        sleep(10);
+        encoderDrive(0.40, 14, -14, 5000);
+        sleep(10);
         if (color.red() * 8 > color.blue() * 8){
 
             rightb.setPosition(1.0);
@@ -174,9 +176,11 @@ public class autoblue3 extends LinearOpMode {
         }
         sleep(1000);
         encoderDrive(0.25, 4, 4, 5000);
-        sleep(50);
+        leftb.setPosition(1.0);
+        rightb.setPosition(0.0);
+        sleep(10);
         encoderDrive(0.25, -4, -4, 5000);
-        sleep(50);
+        sleep(10);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
